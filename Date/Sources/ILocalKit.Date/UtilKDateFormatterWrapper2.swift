@@ -21,6 +21,7 @@ import SUtilKit_SwiftUI
 ///.medium    "3:30:00 PM"    "下午3:30:00"
 ///.long    "3:30:00 PM GMT+8"    "GMT+8 下午3:30:00"
 ///.full    同 .long    同 .long
+import Foundation
 
 public final class UtilKDateFormatterWrapper2{
     nonisolated(unsafe) private static var _dateFormatters: [String: DateFormatter] = [:]
@@ -30,7 +31,7 @@ public final class UtilKDateFormatterWrapper2{
         let key = timeZone != nil ? "\(pattern)\(timeZone!)" : pattern
         // 读操作（并发）
         if let formatter = _queue.sync(execute: { _dateFormatters[key] }) {
-            return formatter
+            return formatte
         }
         // 写操作（屏障保护）
         return _queue.sync(flags: .barrier) {
@@ -46,4 +47,14 @@ public final class UtilKDateFormatterWrapper2{
             return formatter
         }
     }
+}
+
+struct MyView:View {
+    var body: some View {
+    Text("1")
+    }
+}
+
+#Preview {
+    MyView()
 }
